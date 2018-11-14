@@ -19,11 +19,11 @@ export const Form = styled.form`
     height: 55px;
     padding: 0 20px;
     background: #FFF;
-    border: 1px solid #444;
     font-size: 18px;
     color: #444;
     border-radius: 3px;
     outline: 0;
+    border: ${props => (props.withError ? '2px solid #F00' : 0)}; 
   }
 
   button {

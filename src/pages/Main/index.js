@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import api from '../../services/api';
-
 import logo from '../../assets/logo.png';
-
 import { Container, Form } from './styles';
-
 import CompareList from '../../components/CompareList';
 
 export default class main extends Component {
   state = {
+    repositoryError: false,
     repositoryInput: '',
     repositories: [
       
@@ -27,9 +25,10 @@ export default class main extends Component {
       this.setState({
         repositoryInput: '',
         repositories: [...this.state.repositories, repository],
+        repositoryError: false,
       });
     } catch (err) {
-      console.log(err);
+      this.setState({ repositoryError: true});
     }
   };
 
@@ -38,7 +37,7 @@ export default class main extends Component {
       <Container>
         <img src={logo} alt="Github Compare" width="200" />
 
-        <Form onSubmit={ this.handleAddRepository }>
+        <Form withError={this.state.repositoryError} onSubmit={ this.handleAddRepository }>
           <input 
             type="text" 
             placeholder="Usuário/Repositório" 
